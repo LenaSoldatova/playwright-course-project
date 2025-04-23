@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: 18
 
@@ -29,13 +29,13 @@ jobs:
         run: npx playwright test
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: allure-results
           path: allure-results/
 
       - name: Upload Playwright HTML report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: playwright-html-report
           path: playwright-report/
