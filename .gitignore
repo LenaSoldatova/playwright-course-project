@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+package-lock.json
+/package-lock.json
+.package-lock.json
+
+# Playwright reports
+/test-results/
+/playwright-report/
+/playwright/.cache/
+browser-context.json
+
+# Allure reports
+/allure-results/
+/allure-report/
+/blob-report/
+
+# dotenv
+#.env
