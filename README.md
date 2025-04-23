@@ -1,13 +1,18 @@
 # QA Automation Coursework Project
 
-This project was created as part of a QA automation course. It contains automated end-to-end tests for a web application using [Playwright](https://playwright.dev/), TypeScript, and Allure reports.
+![GitHub Workflow Status](https://github.com/LenaSoldatova/playwright-course-project/actions/workflows/tests.yml/badge.svg)
 
-## 🎯 Project Goals
+This project was created as part of a QA automation course. It contains end-to-end and API automated tests for [fophelp.pro](https://www.fophelp.pro) using [Playwright](https://playwright.dev/), TypeScript, GitHub Actions, and Allure for reporting.
 
-- Learn and apply Playwright for E2E testing
-- Structure tests using the Page Object Model (POM)
-- Integrate test reporting with Allure
-- Use GitHub Actions and Docker (optionally) for CI/CD automation
+---
+
+## 🚀 Features
+
+- ✅ E2E tests for UI flows (income, expenses, taxes, reports)
+- 🌐 API tests using Playwright's `request` API
+- 📄 Reports:
+  - [Playwright HTML Report (GitHub Pages)](https://lenasoldatova.github.io/playwright-course-project/)
+  - Allure Report (downloadable from Actions)
 
 ---
 
@@ -16,98 +21,96 @@ This project was created as part of a QA automation course. It contains automate
 ### 1. Install dependencies
 
 ```bash
-npm install
+npm ci
 ```
 
-### 2. Create a `.env` file in the project root
+### 2. Install browsers
 
-Use the example below or copy from `env.example`.
+```bash
+npx playwright install --with-deps
+```
+
+### 3. Create a `.env` file
+
+Use the example below to set up credentials:
 
 ```env
 TEST_EMAIL=your-email@example.com
 TEST_PASSWORD=yourSecurePassword123
 ```
 
-### 3. Run all tests
+### 4. Run all tests
 
 ```bash
-npm run test
+npx playwright test
 ```
 
-### 4. Run tests with visible browser (headed mode)
+### 5. View Playwright HTML report
 
 ```bash
-npm run test:headed
+npx playwright show-report
 ```
 
 ---
 
-## 📊 Allure Reports
+## 🧪 Example Test Files
 
-### 1. Run tests with Allure results
+- `login.spec.ts` — login validation scenarios
+- `incomings.spec.ts` — add income flow
+- `expenses.spec.ts` — add expense flow
+- `e2e-tax-flow.spec.ts` — full flow: add income + expense → post tax → check report
+- `api/public-api.spec.ts` — currency conversion API test
+- `api/github-api.spec.ts` — GitHub API user test
 
-```bash
-npx playwright test --reporter=line,allure-playwright
-```
+---
 
-### 2. Generate and open the Allure report
+## 📊 Reports
+
+### Allure Report (local)
+
+Generate and open:
 
 ```bash
 npm run allure:report
 ```
 
-If you don't have Allure installed globally, you can use `npx`:
+or using `npx`:
 
 ```bash
 npx allure generate ./allure-results --clean -o ./allure-report
 npx allure open ./allure-report
 ```
 
-Or install it globally:
+Install globally (if needed):
 
 ```bash
 npm install -g allure-commandline --save-dev
 ```
+
+### HTML Report (CI/CD)
+
+- ✅ [View hosted report](https://lenasoldatova.github.io/playwright-course-project/)
+- ✅ Download Allure + HTML artifacts from the [Actions tab](https://github.com/LenaSoldatova/playwright-course-project/actions)
 
 ---
 
 ## 📁 Project Structure
 
 ```
-├── .github/workflows/         # GitHub Actions config
-├── src/
-│   └── pages/                 # Page Object classes (POM)
-├── tests/                     # Test specifications
-├── .env                       # Environment variables (not committed)
-├── .gitignore
+.
+├── .github/workflows/         # GitHub Actions workflow
+├── tests/                     # UI + API test files
+├── src/pages/                 # Page Object Model (POM)
+├── playwright-report/         # Playwright HTML report
+├── allure-results/            # Allure raw results
+├── .env                       # Environment secrets (not tracked)
 ├── README.md
 └── package.json
 ```
 
 ---
 
-## 🧪 Test Files Overview
-
-- `login.spec.ts` — login tests with validations
-- `incomings.spec.ts` — test for adding income
-- `expenses.spec.ts` — test for adding expense
-- `e2e-tax-flow.spec.ts` — full flow: income + expense + tax submission + report validation
-
----
-
-## ✅ .gitignore Recommendations
-
-Make sure the following are ignored:
-
-```
-.env
-allure-results/
-allure-report/
-```
-
----
-
-## 📜 Available Scripts
+## 📜 Scripts
 
 ```json
 "scripts": {
@@ -121,9 +124,13 @@ allure-report/
 
 ---
 
-## 🧩 Example .env
+## ✅ .gitignore Notes
 
-```env
-TEST_EMAIL=your-email@example.com
-TEST_PASSWORD=yourSecurePassword123
+```gitignore
+.env
+allure-results/
+allure-report/
+playwright-report/
 ```
+
+---
